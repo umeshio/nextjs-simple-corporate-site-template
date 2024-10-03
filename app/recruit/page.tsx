@@ -1,10 +1,11 @@
-import styles from '@/app/page.module.css';
+import globalStyles from '@/app/page.module.css';
+import pageStyles from './page.module.css';
 
 export default function Page() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
-        <p className={styles.text}>
+    <section className={globalStyles.section}>
+      <div className={pageStyles.container}>
+        <p className={pageStyles.text}>
           ダミーテキスト ダミーテキスト ダミーテキスト
           <br />
           ダミーテキスト ダミーテキスト ダミーテキスト ダミーテキスト

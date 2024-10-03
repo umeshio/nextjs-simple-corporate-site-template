@@ -1,3 +1,4 @@
+import ThreeObject from '@/app/_components/ThreeObject/paage';
 import styles from '@/app/page.module.css';
 
 export default function Page() {
@@ -10,6 +11,7 @@ export default function Page() {
           ダミーテキスト ダミーテキスト ダミーテキスト ダミーテキスト
         </p>
       </div>
+      <ThreeObject></ThreeObject>
     </section>
   );
 }
