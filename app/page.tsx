@@ -39,14 +39,14 @@ export default async function Page() {
       <section className={styles.section}>
         <div className={styles.horizontal}>
           <div>
-            <h2 className={styles.sectionTitleEn}>Business</h2>
+            <h2 className={styles.sectionTitleEn}>Service</h2>
             <p className={styles.sectionTitleJa}>事業内容</p>
             <p className={styles.sectionDescription}>
               当社は、次世代テクノロジーの研究開発・製造・販売を行う革新的な企業です。
               <br />
               AI、ロボット工学、自律システムなど、幅広い分野でのソリューション提供を通じて、社会の進化と未来の創造に貢献します。
             </p>
-            <ButtonLink href="/business">もっとみる</ButtonLink>
+            <ButtonLink href="/service">もっとみる</ButtonLink>
           </div>
           <Image
             className={styles.businessImg}

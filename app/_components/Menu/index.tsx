@@ -19,8 +19,8 @@ export default function Menu() {
             </Link>
           </li>
           <li>
-            <Link href="/business" onClick={close}>
-              事業内容
+            <Link href="/service" onClick={close}>
+              サービス
             </Link>
           </li>
           <li>
@@ -29,7 +29,7 @@ export default function Menu() {
             </Link>
           </li>
           <li>
-            <Link href="" onClick={close}>
+            <Link href="/recruit" onClick={close}>
               採用情報
             </Link>
           </li>
