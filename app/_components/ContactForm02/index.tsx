@@ -46,10 +46,11 @@ const Contact = () => {
     const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const templateId02 = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE02_ID;
 
     const { name, email, content } = data;
 
-    if (userId && serviceId && templateId) {
+    if (userId && serviceId && templateId && templateId02) {
       //emailjsを初期化する
       emailjs.init(userId);
 
@@ -62,6 +63,7 @@ const Contact = () => {
 
       //送信する
       await emailjs.send(serviceId, templateId, params);
+      await emailjs.send(serviceId, templateId02, params);
       form.reset();
     }
   };
