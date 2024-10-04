@@ -1,7 +1,5 @@
 'use client';
 
-// https://zenn.dev/y_ta/books/16910da8a3748e/viewer/d3f8be
-
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import {
@@ -32,8 +30,9 @@ const formSchema = z.object({
 type formType = z.infer<typeof formSchema>;
 
 const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // ローディング中を管理
+  const [isSubmitted, setIsSubmitted] = useState(false); // 送信完了状態を管理
+  const [isConfirming, setIsConfirming] = useState(false); // 確認画面状態を管理
+  const [isLoading, setIsLoading] = useState(false); // ローディング状態
   const form = useForm<formType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,7 +43,7 @@ const Contact = () => {
   });
 
   const onSubmit: SubmitHandler<formType> = async (data: formType) => {
-    setIsLoading(true); // 送信中にローディング状態にする
+    setIsLoading(true);
     const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -70,71 +69,105 @@ const Contact = () => {
       await emailjs.send(serviceId, templateId, params);
       await emailjs.send(serviceId, templateId02, params);
       form.reset();
-      setIsSubmitted(true); // 送信完了時に状態を更新
+      setIsSubmitted(true); // 送信完了状態に設定
     } catch (error) {
       console.error('送信エラー:', error);
     } finally {
-      setIsLoading(false); // 送信後にローディング状態を解除
+      setIsLoading(false);
     }
+  };
+
+  // 確認画面表示関数
+  const handleConfirm = () => {
+    setIsConfirming(true);
+  };
+
+  // 確認画面から戻る関数
+  const handleBack = () => {
+    setIsConfirming(false);
   };
 
   return (
     <div className="container h-screen flex items-center">
       <div className="lg:w-[60%] w-full mx-auto">
-        {!isSubmitted ? ( // フォームを送信後、メッセージに切り替える
+        {!isSubmitted ? (
           <>
-            <h2 className="text-[40px] font-bold mb-[30px]">お問い合わせ</h2>
+            <h2 className="text-[40px] font-bold mb-[30px]">
+              {isConfirming ? '入力内容確認' : 'お問い合わせ'}
+            </h2>
             <Form {...form}>
-              <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>名前</FormLabel>
-                      <FormControl>
-                        <Input placeholder="y_ta" {...field} />
-                      </FormControl>
-                      <FormDescription>お名前をお書きください。</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>メールアドレス</FormLabel>
-                      <FormControl>
-                        <Input placeholder="example@gmail.com" {...field} />
-                      </FormControl>
-                      <FormDescription>メールアドレスをお書きください。</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>お問い合わせ内容</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Next.jsの使い方を教えてください"
-                          {...field}
-                          className="resize-none h-[200px]"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" disabled={isLoading}>
-                  {isLoading ? '送信中...' : '送信'}
-                </Button>
-              </form>
+              {/* 入力画面 */}
+              {!isConfirming ? (
+                <form className="space-y-8" onSubmit={form.handleSubmit(handleConfirm)}>
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>名前</FormLabel>
+                        <FormControl>
+                          <Input placeholder="y_ta" {...field} />
+                        </FormControl>
+                        <FormDescription>お名前をお書きください。</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>メールアドレス</FormLabel>
+                        <FormControl>
+                          <Input placeholder="example@gmail.com" {...field} />
+                        </FormControl>
+                        <FormDescription>メールアドレスをお書きください。</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="content"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>お問い合わせ内容</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Next.jsの使い方を教えてください"
+                            {...field}
+                            className="resize-none h-[200px]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">確認</Button> {/* 確認ボタン */}
+                </form>
+              ) : (
+                /* 確認画面 */
+                <div>
+                  <div className="mb-4">
+                    <p>
+                      <strong>名前:</strong> {form.getValues('name')}
+                    </p>
+                    <p>
+                      <strong>メールアドレス:</strong> {form.getValues('email')}
+                    </p>
+                    <p>
+                      <strong>お問い合わせ内容:</strong> {form.getValues('content')}
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <Button onClick={handleBack}>戻る</Button> {/* 戻るボタン */}
+                    <Button onClick={form.handleSubmit(onSubmit)} disabled={isLoading}>
+                      {isLoading ? '送信中...' : '送信'} {/* 送信ボタン */}
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Form>
           </>
         ) : (
