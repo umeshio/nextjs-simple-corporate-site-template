@@ -1,5 +1,6 @@
+'use client';
 import styles from './page.module.css';
-import ContactForm from '@/app/_components/ContactForm';
+import ContactForm02 from '@/app/_components/ContactForm';
 
 export default function Page() {
   return (
@@ -9,7 +10,8 @@ export default function Page() {
         <br />
         内容確認後、担当者より通常3営業日以内にご連絡いたします。
       </p>
-      <ContactForm />
+      <p className="text-center text-blue-200">Email js test</p>
+      <ContactForm02 />
     </div>
   );
 }

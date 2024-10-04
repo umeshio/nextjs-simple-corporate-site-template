@@ -38,11 +38,6 @@ export default function Menu() {
               お問い合わせ
             </Link>
           </li>
-          <li>
-            <Link href="/contact02" onClick={close}>
-              お問い合わせ02
-            </Link>
-          </li>
         </ul>
         <button className={cx(styles.button, styles.close)} onClick={close}>
           <Image src="/close.svg" alt="閉じる" width={24} height={24} priority />
