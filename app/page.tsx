@@ -19,6 +19,7 @@ export default async function Page() {
           <p className={styles.description}>
             私たちは市場をリードしているグローバルテックカンパニーです。
           </p>
+          <p className="text-red-500">tailwind</p>
         </div>
         <Image
           className={styles.bgimg}
