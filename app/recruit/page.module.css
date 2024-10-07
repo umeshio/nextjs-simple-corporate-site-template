@@ -1,7 +1,25 @@
-.container {
-  background-color: #424242;
+.title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.2rem;
+  text-decoration: underline;
+  text-decoration-color: yellow;
+  text-decoration-thickness: 8px;
+  margin-bottom: 3rem;
 }
 
-.text {
-  color: white;
+.flowList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 640px) {
+  .flowList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
 }

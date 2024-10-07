@@ -1,0 +1,24 @@
+.table {
+  border: 1px solid #555;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tbody {
+  background-color: white;
+}
+
+/* .tr {} */
+
+.th {
+  border: 1px solid #555;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  width: 30%;
+  background-color: aliceblue;
+}
+@media print, screen and (max-width: 680px) {
+  .th {
+    padding: 0.6rem 0.8rem;
+  }
+}

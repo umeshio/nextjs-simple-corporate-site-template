@@ -1,0 +1,17 @@
+.imageBox {
+  max-width: 580px;
+  margin: 2rem auto 0;
+}
+
+.flexBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5%;
+  margin: 2rem 0 0;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.6rem;
+}
