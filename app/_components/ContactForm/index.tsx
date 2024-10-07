@@ -88,7 +88,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="container h-screen flex items-center">
+    <div className="container flex items-center">
       <div className="lg:w-[60%] w-full mx-auto">
         {!isSubmitted ? (
           <>

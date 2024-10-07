@@ -1,9 +1,14 @@
-# シンプルなコーポレートサイト
+# microCMS 配布テンプレート
 
 ![](public/img-cover.png)
 
 microCMS 公式のシンプルなコーポレートサイトのテンプレートです。
-サイト内のお問い合わせ送信先として CRM である [HubSpot](https://www.hubspot.jp/) を利用しています。
+サイト内のお問い合わせ送信先として CRM である [HubSpot](https://www.hubspot.jp/) を利用しています。  
+テンプレートの[github ページ](https://github.com/microcmsio/nextjs-simple-corporate-site-template)
+
+メール送信機能として HUBSPOT をやめて、[Emailjs](https://www.emailjs.com/)を採用しました。  
+Emailjs では送信内容の一覧チェック、csv ダウンロード等はできません。  
+クライアントの要望に応じてプラグインを変更してください
 
 ## 動作環境
 
@@ -17,8 +22,10 @@ Node.js 18 以上
 MICROCMS_API_KEY=xxxxxxxxxx
 MICROCMS_SERVICE_DOMAIN=xxxxxxxxxx
 BASE_URL=xxxxxxxxxx
-HUBSPOT_PORTAL_ID=xxxxxxxx
-HUBSPOT_FORM_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+NEXT_PUBLIC_EMAILJS_USER_ID="xxxxxxxxxxxx"
+NEXT_PUBLIC_EMAILJS_SERVICE_ID="xxxxxxxxxxxx"
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="xxxxxxxxxxxx"
+NEXT_PUBLIC_EMAILJS_TEMPLATE02_ID="xxxxxxxxxxxx"
 ```
 
 `MICROCMS_API_KEY`  
@@ -27,18 +34,18 @@ microCMS 管理画面の「サービス設定 > API キー」から確認する�
 `MICROCMS_SERVICE_DOMAIN`  
 microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の部分です。
 
-`BASE_URL`
+`BASE_URL`  
 デプロイ先の URL です。プロトコルから記載してください。
 
 例）  
 開発環境 → http://localhost:3000  
 本番環境 → https://xxxxxxxx.vercel.app/ など
 
-`HUBSPOT_PORTAL_ID`
-HubSpot のアカウント ID
+`NEXT_PUBLIC_EMAILJS_USER_ID`  
+Emailjs のユーザー ID です。
 
-`HUBSPOT_FORM_ID`
-HubSpot のフォームに割り当てられる ID
+`NEXT_PUBLIC_EMAILJS_SERVICE_ID`  
+Emailjs のサービス ID です。
 
 ## 開発の仕方
 
