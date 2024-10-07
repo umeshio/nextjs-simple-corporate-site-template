@@ -111,7 +111,7 @@ export default async function Page() {
               <br />
               新しいアイデアを出し合い、成長する環境で活躍したい方は、ぜひご応募ください。当社でのキャリアを築きながら、技術の最前線で力を発揮しましょう。
             </p>
-            <ButtonLink href="">採用情報へ</ButtonLink>
+            <ButtonLink href="/recruit">採用情報へ</ButtonLink>
           </div>
           <Image
             className={styles.hiringImg}
