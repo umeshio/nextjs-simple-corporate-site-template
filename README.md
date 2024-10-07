@@ -3,7 +3,9 @@
 ![](public/img-cover.png)
 
 microCMS 公式のシンプルなコーポレートサイトのテンプレートです。
-サイト内のお問い合わせ送信先として CRM である [HubSpot](https://www.hubspot.jp/) を利用しています。  
+サイト内のお問い合わせ送信先として CRM である [HubSpot](https://www.hubspot.jp/) を利用しています。
+
+microCMS 公式の[テンプレートページ](https://templates.microcms.io/templates/detail/d31fd55a-7a23-4b03-9c27-baa753ce75db)  
 テンプレートの[github ページ](https://github.com/microcmsio/nextjs-simple-corporate-site-template)
 
 メール送信機能として HUBSPOT をやめて、[Emailjs](https://www.emailjs.com/)を採用しました。  
