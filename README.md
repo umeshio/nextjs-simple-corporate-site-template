@@ -45,7 +45,12 @@ microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の�
 Emailjs のユーザー ID です。
 
 `NEXT_PUBLIC_EMAILJS_SERVICE_ID`  
-Emailjs のサービス ID です。
+Emailjs で作ったフォームのサービス ID です。
+
+`NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`  
+`NEXT_PUBLIC_EMAILJS_TEMPLATE02_ID`  
+Emailjs で作った、受信メール or 自動返信メールの ID です  
+名前がわかりにくければ変えて OK です
 
 ## 開発の仕方
 
