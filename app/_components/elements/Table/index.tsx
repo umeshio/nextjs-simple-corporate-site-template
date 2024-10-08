@@ -12,7 +12,7 @@ const Table = ({ items }: TableProps) => {
         {items.map((item, index) => (
           <tr key={index} className={styles.tr}>
             <th className={styles.th}>{item.th}</th>
-            <td className="border-[1px] border-black py-3 px-5">{item.td}</td>
+            <td className={styles.td}>{item.td}</td>
           </tr>
         ))}
       </tbody>

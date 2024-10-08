@@ -1,7 +1,7 @@
 .table {
-  border: 1px solid #555;
-  border-collapse: collapse;
+  border-collapse: separate;
   width: 100%;
+  border-spacing: 0 5px;
 }
 
 .tbody {
@@ -11,14 +11,22 @@
 /* .tr {} */
 
 .th {
-  border: 1px solid #555;
   padding: 1rem 1.2rem;
   text-align: left;
   width: 30%;
-  background-color: aliceblue;
+  background-color: #f8f8f8;
 }
 @media print, screen and (max-width: 680px) {
   .th {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+.td {
+  padding: 1rem 1.2rem;
+}
+@media print, screen and (max-width: 680px) {
+  .td {
     padding: 0.6rem 0.8rem;
   }
 }
