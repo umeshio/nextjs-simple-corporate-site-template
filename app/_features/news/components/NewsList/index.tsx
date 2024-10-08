@@ -1,5 +1,5 @@
-import { Article } from '@/app/_libs/microcms';
-import NewsListItem from '../NewsListItem';
+import { Article } from '@/app/_features/news/libs/microcms';
+import NewsListItem from '@/app/_features/news/components/NewsListItem';
 
 type Props = {
   articles?: Article[];

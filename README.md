@@ -78,3 +78,8 @@ npm run dev
 - [ディレクトリ構成](https://github.com/microcmsio/nextjs-simple-corporate-site-template/blob/main/docs/directory-structure.md)
 - [HubSpot の準備](https://github.com/microcmsio/nextjs-simple-corporate-site-template/blob/main/docs/hubspot-setting.md)
 - [Vercel へのデプロイ](https://github.com/microcmsio/nextjs-simple-corporate-site-template/blob/main/docs/vercel-deploy.md)
+
+## 参考サイト
+
+- [features ディレクトリ構成](https://zenn.dev/yodaka/articles/eca2d4bf552aeb)
+- [features ディレクトリ構成](https://qiita.com/miumi/items/359b8a77bbb6f9666950)

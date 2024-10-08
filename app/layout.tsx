@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
-import Footer from '@/app/_components/Footer';
-import Header from '@/app/_components/Header';
+import Footer from '@/app/_components/project/Footer';
+import Header from '@/app/_components/project/Header';
 import './globals.css';
 import styles from './layout.module.css';
 

@@ -1,104 +1,77 @@
+// ContactForm.tsx
 'use client';
 
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import {
   Form,
-  FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormControl,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Textarea } from '@/components/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { formSchema } from '../../schemas/formSchema'; // バリデーションをインポート
+import { sendContactEmail } from '../../api/emailService'; // API呼び出し関数をインポート
+import { formType } from '../../types/formTypes'; // 型定義をインポート
+import Thanks from '../Thanks';
 
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: '2文字以上で入力してください' })
-    .max(10, { message: '10文字以下で入力してください' }),
-  email: z.string().email({ message: 'メールアドレスの形式ではありません' }),
-  content: z.string().min(1, { message: 'お問い合わせ内容は入力必須です。' }),
-});
+const ContactForm = () => {
+  // フォーム画面の状態管理
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-type formType = z.infer<typeof formSchema>;
-
-const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false); // 送信完了状態を管理
-  const [isConfirming, setIsConfirming] = useState(false); // 確認画面状態を管理
-  const [isLoading, setIsLoading] = useState(false); // ローディング状態
   const form = useForm<formType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      content: '',
-    },
+    defaultValues: { name: '', email: '', content: '' },
   });
 
   const onSubmit: SubmitHandler<formType> = async (data: formType) => {
     setIsLoading(true);
-    const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const templateId02 = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE02_ID;
-
-    const { name, email, content } = data;
-
-    if (!userId || !serviceId || !templateId || !templateId02) {
-      console.error('環境変数が不足しています。');
-      setIsLoading(false);
-      return;
-    }
-
-    emailjs.init(userId);
-
-    const params = {
-      name,
-      email,
-      content,
-    };
-
     try {
-      await emailjs.send(serviceId, templateId, params);
-      await emailjs.send(serviceId, templateId02, params);
+      await sendContactEmail(data); // API呼び出し関数を使用
       form.reset();
-      setIsSubmitted(true); // 送信完了状態に設定
+      setIsSubmitted(true);
     } catch (error) {
       console.error('送信エラー:', error);
+      setIsError(true);
+      setErrorMessage('送信中にエラーが発生しました。もう一度お試しください。');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // 確認画面表示関数
-  const handleConfirm = () => {
-    setIsConfirming(true);
-  };
-
-  // 確認画面から戻る関数
-  const handleBack = () => {
-    setIsConfirming(false);
-  };
-
+  // JSX部分も基本的にそのまま使用
   return (
     <div className="container flex items-center">
       <div className="lg:w-[60%] w-full mx-auto">
-        {!isSubmitted ? (
+        {isError ? (
+          <div className="text-center">
+            <h2 className="text-lg font-bold mb-[30px] text-red-600">エラーが発生しました</h2>
+            <p className="text-red-600 mb-4">{errorMessage}</p>
+            <Button onClick={() => setIsError(false)}>戻る</Button>{' '}
+            {/* エラー状態を解除してフォームに戻る */}
+          </div>
+        ) : !isSubmitted ? (
           <>
             <h2 className="text-[40px] font-bold mb-[30px]">
               {isConfirming ? '入力内容確認' : 'お問い合わせ'}
             </h2>
             <Form {...form}>
-              {/* 入力画面 */}
               {!isConfirming ? (
-                <form className="space-y-8" onSubmit={form.handleSubmit(handleConfirm)}>
+                <form
+                  className="space-y-8"
+                  onSubmit={form.handleSubmit(() => setIsConfirming(true))}
+                >
+                  {/* 名前、メールアドレス、お問い合わせ内容のフォーム */}
                   <FormField
                     control={form.control}
                     name="name"
@@ -144,11 +117,11 @@ const Contact = () => {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit">確認</Button> {/* 確認ボタン */}
+                  <Button type="submit">確認</Button>
                 </form>
               ) : (
-                /* 確認画面 */
                 <div>
+                  {/* 確認画面 */}
                   <div className="mb-4">
                     <p>
                       <strong>名前:</strong> {form.getValues('name')}
@@ -160,10 +133,10 @@ const Contact = () => {
                       <strong>お問い合わせ内容:</strong> {form.getValues('content')}
                     </p>
                   </div>
-                  <div className="space-y-4">
-                    <Button onClick={handleBack}>戻る</Button> {/* 戻るボタン */}
+                  <div className="flex gap-x-4 items-center">
+                    <Button onClick={() => setIsConfirming(false)}>戻る</Button>
                     <Button onClick={form.handleSubmit(onSubmit)} disabled={isLoading}>
-                      {isLoading ? '送信中...' : '送信'} {/* 送信ボタン */}
+                      {isLoading ? '送信中...' : '送信'}
                     </Button>
                   </div>
                 </div>
@@ -171,13 +144,11 @@ const Contact = () => {
             </Form>
           </>
         ) : (
-          <h2 className="text-[40px] font-bold mb-[30px] text-center">
-            送信ありがとうございます！
-          </h2>
+          <Thanks></Thanks>
         )}
       </div>
     </div>
   );
 };
 
-export default Contact;
+export default ContactForm;

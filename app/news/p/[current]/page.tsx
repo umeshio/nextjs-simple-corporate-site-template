@@ -1,7 +1,7 @@
-import { getNewsList } from '@/app/_libs/microcms';
-import { NEWS_LIST_LIMIT } from '@/app/_constants';
-import Pagination from '@/app/_components/Pagination';
-import ArticleList from '@/app/_components/NewsList';
+import { getNewsList } from '@/app/_features/news/libs/microcms';
+import { NEWS_LIST_LIMIT } from '@/app/_features/news/libs/limit';
+import Pagination from '@/app/_features/news/components/Pagination';
+import ArticleList from '@/app/_features/news/components/NewsList';
 
 type Props = {
   params: {

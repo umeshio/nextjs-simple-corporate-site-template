@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import { formatRichText } from '@/app/_libs/utils';
-import { type Article } from '@/app/_libs/microcms';
-import PublishedDate from '../Date';
+import { formatRichText } from '@/app/_features/news/libs/utils';
+import { type Article } from '@/app/_features/news/libs/microcms';
+import PublishedDate from '@/app/_features/news/components/Date';
 import styles from './index.module.css';
-import Category from '../Category';
+import Category from '@/app/_features/news/components/Category';
 
 type Props = {
   data: Article;

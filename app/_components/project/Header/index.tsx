@@ -1,4 +1,4 @@
-import Menu from '@/app/_components/Menu';
+import Menu from '@/app/_components/project/Menu';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.css';

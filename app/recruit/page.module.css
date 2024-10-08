@@ -12,10 +12,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+  margin-bottom: 70px;
 }
 @media (max-width: 640px) {
   .flowList {
     grid-template-columns: 1fr;
+    margin-bottom: 50px;
   }
 }
 
