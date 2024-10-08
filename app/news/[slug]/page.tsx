@@ -13,6 +13,8 @@ type Props = {
   };
 };
 
+export const runtime = 'edge';
+
 export const revalidate = 60;
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
